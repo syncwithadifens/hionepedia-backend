@@ -92,6 +92,19 @@
                                                         <img src="/img/default_thumbnail.png" alt="..." class="img-thumbnail img-preview">
                                                     </div>
                                                 </div>
+
+                                                <div class="form-group row mb-3">
+                                                    <label for="sound" class="col-sm-2 col-form-label" id="soundLabel">Sound</label>
+                                                    <div class="col-sm-8 input-group mb-3">
+                                                        <input type="file" class="form-control" name="sound" id="sound" aria-describedby="sound">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="model" class="col-sm-2 col-form-label" id="modelLabel">Model</label>
+                                                    <div class="col-sm-8 input-group mb-3">
+                                                        <input type="file" class="form-control" name="model" id="model" aria-describedby="model">
+                                                    </div>
+                                                </div>
                                                 <div class="col-12 d-flex justify-content-end">
                                                     <button type="submit" class="btn btn-primary me-1 mb-1">
                                                         Submit

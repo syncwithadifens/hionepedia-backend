@@ -49,6 +49,12 @@
                                     <p class="card-text">
                                         <?= $animal['description']; ?>
                                     </p>
+                                    <p class="card-text">
+                                        sound: <?= $animal['sound']; ?>
+                                    </p>
+                                    <p class="card-text">
+                                        model: <?= $animal['model']; ?>
+                                    </p>
                                     <a href="/animal/<?= $animal['slug']; ?>/edit" class="btn btn-warning">Ubah</a>
                                     <form action="/animal/<?= $animal['id']; ?>" method="post" class="d-inline">
                                         <?= csrf_field(); ?>

@@ -13,7 +13,7 @@ class AnimalModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'slug', 'description', 'thumbnail'];
+    protected $allowedFields    = ['name', 'slug', 'description', 'thumbnail', 'sound', 'model'];
 
     // Dates
     protected $useTimestamps = false;

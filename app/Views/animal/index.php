@@ -52,6 +52,8 @@
                                     <th>Nama</th>
                                     <th>Deskripsi</th>
                                     <th>Thumbnail</th>
+                                    <th>Sound</th>
+                                    <th>Model</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -63,6 +65,8 @@
                                         <td class="align-middle"><?= $a['name']; ?></td>
                                         <td class="align-middle"><?= $a['description']; ?></td>
                                         <td class="align-middle"><img src="/img/<?= $a['thumbnail']; ?>" alt="image" class="thumbnail"></td>
+                                        <td class="align-middle"><?= $a['sound']; ?></td>
+                                        <td class="align-middle"><?= $a['model']; ?></td>
                                         <td class="align-middle"><a href="/animal/<?= $a['slug']; ?>" class="btn btn-success">Detail</a></td>
                                     </tr>
                                 <?php endforeach; ?>

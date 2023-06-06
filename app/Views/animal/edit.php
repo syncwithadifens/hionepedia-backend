@@ -50,6 +50,8 @@
                                         <?= csrf_field(); ?>
                                         <input type="hidden" name="slug" value="<?= $animal['slug']; ?>">
                                         <input type="hidden" name="oldThumbnail" value="<?= $animal['thumbnail']; ?>">
+                                        <input type="hidden" name="oldSound" value="<?= $animal['sound']; ?>">
+                                        <input type="hidden" name="oldModel" value="<?= $animal['model']; ?>">
                                         <div class="form-body">
                                             <div class="row">
                                                 <div class="col-12">
@@ -92,6 +94,19 @@
                                                     </div>
                                                     <div class="col-sm-2">
                                                         <img src="/img/<?= $animal['thumbnail']; ?>" alt="..." class="img-thumbnail img-preview">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-3">
+                                                    <label for="sound" class="col-sm-2 col-form-label" id="soundLabel">Sound</label>
+                                                    <div class="col-sm-8 input-group mb-3">
+                                                        <input type="file" class="form-control" name="sound" id="sound" aria-describedby="sound">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="model" class="col-sm-2 col-form-label" id="modelLabel">Model</label>
+                                                    <div class="col-sm-8 input-group mb-3">
+                                                        <input type="file" class="form-control" name="model" id="model" aria-describedby="model">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 d-flex justify-content-end">

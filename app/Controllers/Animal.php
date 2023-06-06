@@ -60,8 +60,10 @@ class Animal extends BaseController
             return redirect()->back()->withInput()->with('validation', $validation);
         }
 
+        //* Create slug
         $slug = url_title($this->request->getVar('name'), '-', true);
 
+        //* Upload Thumbnail
         $thumbnail = $this->request->getFile('thumbnail');
         if ($thumbnail->getError() == 4) {
             $thumbnailName = 'default_thumbnail.png';
@@ -70,11 +72,31 @@ class Animal extends BaseController
             $thumbnail->move('img', $thumbnailName);
         }
 
+        //* Upload Sound
+        $sound = $this->request->getFile('sound');
+        if ($sound->getError() == 4) {
+            $soundName = 'default_thumbnail.png';
+        } else {
+            $soundName = $sound->getRandomName();
+            $sound->move('sound', $soundName);
+        }
+
+        //* Upload 3D Model
+        $model = $this->request->getFile('model');
+        if ($model->getError() == 4) {
+            $modelName = 'default_thumbnail.png';
+        } else {
+            $modelName = $model->getRandomName();
+            $model->move('model', $modelName);
+        }
+
         $this->animalModel->save([
             'name' => $this->request->getVar('name'),
             'slug' => $slug,
             'description' => $this->request->getVar('description'),
             'thumbnail' => $thumbnailName,
+            'sound' => $soundName,
+            'model' => $modelName,
         ]);
 
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
@@ -93,6 +115,7 @@ class Animal extends BaseController
 
     public function update($id)
     {
+        //* Check existing thumbnail
         $thumbnail = $this->request->getFile('thumbnail');
         if ($thumbnail->getError() == 4) {
             $thumbnailName = $this->request->getVar('oldThumbnail');
@@ -104,12 +127,38 @@ class Animal extends BaseController
             }
         }
 
+        //* Check existing sound
+        $sound = $this->request->getFile('sound');
+        if ($sound->getError() == 4) {
+            $soundName = $this->request->getVar('oldSound');
+        } else {
+            $soundName = $sound->getRandomName();
+            $sound->move('sound', $soundName);
+            if ($this->request->getVar('oldSound') !== 'default_thumbnail.png') {
+                unlink('sound/' . $this->request->getVar('oldSound'));
+            }
+        }
+
+        //* Check existing model
+        $model = $this->request->getFile('model');
+        if ($model->getError() == 4) {
+            $modelName = $this->request->getVar('oldModel');
+        } else {
+            $modelName = $model->getRandomName();
+            $model->move('model', $modelName);
+            if ($this->request->getVar('oldModel') !== 'default_thumbnail.png') {
+                unlink('model/' . $this->request->getVar('oldModel'));
+            }
+        }
+
         $this->animalModel->save([
             'id' => $id,
             'name' => $this->request->getVar('name'),
             'slug' => $this->request->getVar('slug'),
             'description' => $this->request->getVar('description'),
             'thumbnail' => $thumbnailName,
+            'sound' => $soundName,
+            'model' => $modelName,
         ]);
 
         session()->setFlashdata('pesan', 'Data berhasil diubah');
@@ -121,6 +170,12 @@ class Animal extends BaseController
         $animal = $this->animalModel->find($id);
         if ($animal['thumbnail'] != 'default_thumbnail.png') {
             unlink('img/' . $animal['thumbnail']);
+        }
+        if ($animal['sound'] != 'default_thumbnail.png') {
+            unlink('sound/' . $animal['sound']);
+        }
+        if ($animal['model'] != 'default_thumbnail.png') {
+            unlink('model/' . $animal['model']);
         }
 
         $this->animalModel->delete($id);

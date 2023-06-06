@@ -55,6 +55,7 @@ class Animal extends ResourceController
             return $this->failValidationErrors($response);
         }
 
+        //* Upload Thumbnail
         $thumbnail = $this->request->getFile('thumbnail');
         if ($thumbnail->getError() == 4) {
             $thumbnailName = 'default_thumbnail.png';
@@ -63,11 +64,31 @@ class Animal extends ResourceController
             $thumbnail->move('img', $thumbnailName);
         }
 
+        //* Upload Sound
+        $sound = $this->request->getFile('sound');
+        if ($sound->getError() == 4) {
+            $soundName = 'default_thumbnail.png';
+        } else {
+            $soundName = $sound->getRandomName();
+            $sound->move('sound', $soundName);
+        }
+
+        //* Upload Model
+        $model = $this->request->getFile('model');
+        if ($model->getError() == 4) {
+            $modelName = 'default_thumbnail.png';
+        } else {
+            $modelName = $model->getRandomName();
+            $model->move('model', $modelName);
+        }
+
         $this->animalModel->save([
             'name' => $this->request->getVar('name'),
             'slug' => $slug,
             'description' => $this->request->getVar('description'),
             'thumbnail' => $thumbnailName,
+            'sound' => $soundName,
+            'model' => $modelName,
         ]);
 
         $response = [
@@ -99,6 +120,7 @@ class Animal extends ResourceController
             return $this->failValidationErrors($response);
         }
 
+        //* Check existing thumbnail
         $thumbnail = $this->request->getFile('thumbnail');
         if ($thumbnail->getError() == 4) {
             $thumbnailName = 'default_thumbnail.png';
@@ -107,12 +129,32 @@ class Animal extends ResourceController
             $thumbnail->move('img', $thumbnailName);
         }
 
+        //* Check existing sound
+        $sound = $this->request->getFile('sound');
+        if ($sound->getError() == 4) {
+            $soundName = 'default_thumbnail.png';
+        } else {
+            $soundName = $sound->getRandomName();
+            $sound->move('sound', $soundName);
+        }
+
+        //* Check existing model
+        $model = $this->request->getFile('model');
+        if ($model->getError() == 4) {
+            $modelName = 'default_thumbnail.png';
+        } else {
+            $modelName = $model->getRandomName();
+            $model->move('model', $modelName);
+        }
+
         $this->animalModel->save([
             'id' => $id,
             'name' => $this->request->getVar('name'),
             'slug' => $slug,
             'description' => $this->request->getVar('description'),
             'thumbnail' => $thumbnailName,
+            'sound' => $soundName,
+            'model' => $modelName,
         ]);
 
         $response = [
@@ -126,8 +168,17 @@ class Animal extends ResourceController
     public function delete($id = null)
     {
         $animal = $this->animalModel->find($id);
+
         if ($animal['thumbnail'] != 'default_thumbnail.png') {
             unlink('img/' . $animal['thumbnail']);
+        }
+
+        if ($animal['sound'] != 'default_thumbnail.png') {
+            unlink('sound/' . $animal['sound']);
+        }
+
+        if ($animal['model'] != 'default_thumbnail.png') {
+            unlink('model/' . $animal['model']);
         }
 
         $this->animalModel->delete($id);

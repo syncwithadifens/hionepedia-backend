@@ -32,6 +32,14 @@ class Animal extends Migration
                 'type'           => 'TEXT',
                 'null'        => true,
             ],
+            'sound'      => [
+                'type'           => 'TEXT',
+                'null'        => true,
+            ],
+            'model'      => [
+                'type'           => 'TEXT',
+                'null'        => true,
+            ],
             'created_at DATETIME DEFAULT CURRENT_TIMESTAMP'
         ]);
 
