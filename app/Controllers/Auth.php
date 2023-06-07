@@ -16,6 +16,11 @@ class Auth extends BaseController
 
     public function index()
     {
+        $session = session();
+        if ($session->has('logged_in')) {
+            return redirect()->to('/animal');
+        }
+
         $data = [
             'title' => 'Form login',
             'validation' => \Config\Services::validation()

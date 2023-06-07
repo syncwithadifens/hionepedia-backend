@@ -67,7 +67,7 @@ class Animal extends ResourceController
         //* Upload Sound
         $sound = $this->request->getFile('sound');
         if ($sound->getError() == 4) {
-            $soundName = 'default_thumbnail.png';
+            $soundName = 'default_sound.mp3';
         } else {
             $soundName = $sound->getRandomName();
             $sound->move('sound', $soundName);
@@ -76,7 +76,7 @@ class Animal extends ResourceController
         //* Upload Model
         $model = $this->request->getFile('model');
         if ($model->getError() == 4) {
-            $modelName = 'default_thumbnail.png';
+            $modelName = 'default_model.glb';
         } else {
             $modelName = $model->getRandomName();
             $model->move('model', $modelName);
@@ -132,7 +132,7 @@ class Animal extends ResourceController
         //* Check existing sound
         $sound = $this->request->getFile('sound');
         if ($sound->getError() == 4) {
-            $soundName = 'default_thumbnail.png';
+            $soundName = 'default_sound.mp3';
         } else {
             $soundName = $sound->getRandomName();
             $sound->move('sound', $soundName);
@@ -141,7 +141,7 @@ class Animal extends ResourceController
         //* Check existing model
         $model = $this->request->getFile('model');
         if ($model->getError() == 4) {
-            $modelName = 'default_thumbnail.png';
+            $modelName = 'default_model.glb';
         } else {
             $modelName = $model->getRandomName();
             $model->move('model', $modelName);
@@ -173,11 +173,11 @@ class Animal extends ResourceController
             unlink('img/' . $animal['thumbnail']);
         }
 
-        if ($animal['sound'] != 'default_thumbnail.png') {
+        if ($animal['sound'] != 'default_sound.mp3') {
             unlink('sound/' . $animal['sound']);
         }
 
-        if ($animal['model'] != 'default_thumbnail.png') {
+        if ($animal['model'] != 'default_model.glb') {
             unlink('model/' . $animal['model']);
         }
 

@@ -75,7 +75,7 @@ class Animal extends BaseController
         //* Upload Sound
         $sound = $this->request->getFile('sound');
         if ($sound->getError() == 4) {
-            $soundName = 'default_thumbnail.png';
+            $soundName = 'default_sound.mp3';
         } else {
             $soundName = $sound->getRandomName();
             $sound->move('sound', $soundName);
@@ -84,7 +84,7 @@ class Animal extends BaseController
         //* Upload 3D Model
         $model = $this->request->getFile('model');
         if ($model->getError() == 4) {
-            $modelName = 'default_thumbnail.png';
+            $modelName = 'default_model.glb';
         } else {
             $modelName = $model->getRandomName();
             $model->move('model', $modelName);
@@ -134,7 +134,7 @@ class Animal extends BaseController
         } else {
             $soundName = $sound->getRandomName();
             $sound->move('sound', $soundName);
-            if ($this->request->getVar('oldSound') !== 'default_thumbnail.png') {
+            if ($this->request->getVar('oldSound') !== 'default_sound.mp3') {
                 unlink('sound/' . $this->request->getVar('oldSound'));
             }
         }
@@ -146,7 +146,7 @@ class Animal extends BaseController
         } else {
             $modelName = $model->getRandomName();
             $model->move('model', $modelName);
-            if ($this->request->getVar('oldModel') !== 'default_thumbnail.png') {
+            if ($this->request->getVar('oldModel') !== 'default_model.glb') {
                 unlink('model/' . $this->request->getVar('oldModel'));
             }
         }
@@ -171,10 +171,10 @@ class Animal extends BaseController
         if ($animal['thumbnail'] != 'default_thumbnail.png') {
             unlink('img/' . $animal['thumbnail']);
         }
-        if ($animal['sound'] != 'default_thumbnail.png') {
+        if ($animal['sound'] != 'default_sound.mp3') {
             unlink('sound/' . $animal['sound']);
         }
-        if ($animal['model'] != 'default_thumbnail.png') {
+        if ($animal['model'] != 'default_model.glb') {
             unlink('model/' . $animal['model']);
         }
 
