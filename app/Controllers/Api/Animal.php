@@ -217,25 +217,13 @@ class Animal extends ResourceController
 
     public function getUserFavorite()
     {
-        // Get user ID from authentication or session
-        $userId = 1; // Replace with your own logic
+        $userId = 1;
+        $result = [
+            'status' => 'success',
+            'favorited' => $this->animalModel->join('favorites', 'animals.animal_id = favorites.animal_id')->where('favorites.user_id', $userId)->get()->getResult()
+        ];
 
-        $favoriteModel = new FavoriteModel();
-
-        $favoriteItem = $favoriteModel
-            ->where('user_id', $userId)
-            ->findAll();
-
-        $favoriteAnimal = [];
-
-        foreach ($favoriteItem as $item) {
-            $animal = $this->animalModel->find($item['animal_id']);
-            if ($animal) {
-                $favoriteAnimal[] = $animal;
-            }
-        }
-
-        return $this->respond($favoriteAnimal);
+        return $this->respondCreated($result);
     }
 
     public function delete($id = null)
