@@ -46,7 +46,7 @@
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form form-vertical" action="/animal/update/<?= $animal['id']; ?>" method="post" enctype="multipart/form-data">
+                                    <form class="form form-vertical" action="/animal/update/<?= $animal['animal_id']; ?>" method="post" enctype="multipart/form-data">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" name="slug" value="<?= $animal['slug']; ?>">
                                         <input type="hidden" name="oldThumbnail" value="<?= $animal['thumbnail']; ?>">

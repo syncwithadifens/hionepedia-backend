@@ -36,6 +36,10 @@ $routes->post('animal/update/(:segment)', 'Animal::update/$1');
 $routes->resource('api/animal', ['controller' => 'Api\Animal']);
 $routes->post('api/animal/update/(:num)', 'Api\Animal::update/$1');
 
+$routes->post('api/animal/(:num)/favorite', 'Api\Animal::addToFavorite/$1');
+$routes->delete('api/favorite/(:num)', 'Api\Animal::removeFromFavorite/$1');
+$routes->get('api/favorite', 'Api\Animal::getUserFavorite');
+
 $routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::doLogin');
 $routes->get('register', 'Auth::register');
@@ -46,6 +50,7 @@ $routes->group('api', function ($routes) {
     $routes->post('login', 'Api\Auth::login');
     $routes->post('register', 'Api\Auth::register');
 });
+
 // $routes->get('animal/(:num)', 'Api\Animal::show/$1');
 // $routes->delete('animal/(:num)', 'Api\Animal::delete/$1');
 /*

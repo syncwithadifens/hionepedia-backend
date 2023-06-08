@@ -152,7 +152,7 @@ class Animal extends BaseController
         }
 
         $this->animalModel->save([
-            'id' => $id,
+            'animal_id' => $id,
             'name' => $this->request->getVar('name'),
             'slug' => $this->request->getVar('slug'),
             'description' => $this->request->getVar('description'),

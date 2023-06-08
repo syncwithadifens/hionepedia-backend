@@ -10,7 +10,7 @@ class Animal extends Migration
     {
         // Membuat kolom/field untuk tabel animal
         $this->forge->addField([
-            'id'             => [
+            'animal_id'             => [
                 'type'           => 'INT',
                 'constraint'     => 5,
                 'unsigned'       => true,
@@ -40,11 +40,16 @@ class Animal extends Migration
                 'type'           => 'TEXT',
                 'null'        => true,
             ],
+            'offline'      => [
+                'type'           => 'VARCHAR',
+                'constraint'        => '100',
+                'default' => 'no'
+            ],
             'created_at DATETIME DEFAULT CURRENT_TIMESTAMP'
         ]);
 
         // Membuat primary key
-        $this->forge->addKey('id', TRUE);
+        $this->forge->addKey('animal_id', TRUE);
 
         // Membuat tabel hewan
         $this->forge->createTable('animals', TRUE);

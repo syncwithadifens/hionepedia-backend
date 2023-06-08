@@ -10,7 +10,7 @@ class User extends Migration
     {
         // Membuat kolom/field untuk tabel user
         $this->forge->addField([
-            'id'             => [
+            'user_id'             => [
                 'type'           => 'INT',
                 'constraint'     => 5,
                 'unsigned'       => true,
@@ -38,7 +38,7 @@ class User extends Migration
         ]);
 
         // Membuat primary key
-        $this->forge->addKey('id', TRUE);
+        $this->forge->addKey('user_id', TRUE);
 
         // Membuat tabel user
         $this->forge->createTable('users', TRUE);

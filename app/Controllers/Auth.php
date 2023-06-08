@@ -55,7 +55,7 @@ class Auth extends BaseController
             if (password_verify($pin, $user['pin'])) {
                 // Store user data in session
                 $sessionData = [
-                    'user_id' => $user['id'],
+                    'user_id' => $user['user_id'],
                     'username' => $user['username'],
                     'logged_in' => true
                 ];

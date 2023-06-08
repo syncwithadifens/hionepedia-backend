@@ -56,7 +56,7 @@
                                         model: <?= $animal['model']; ?>
                                     </p>
                                     <a href="/animal/<?= $animal['slug']; ?>/edit" class="btn btn-warning">Ubah</a>
-                                    <form action="/animal/<?= $animal['id']; ?>" method="post" class="d-inline">
+                                    <form action="/animal/<?= $animal['animal_id']; ?>" method="post" class="d-inline">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda ingin menghapus?');">Hapus</button>

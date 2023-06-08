@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AnimalModel extends Model
+class FavoriteModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'animals';
-    protected $primaryKey       = 'animal_id';
+    protected $table            = 'favorites';
+    protected $primaryKey       = 'favorite_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'slug', 'description', 'thumbnail', 'sound', 'model'];
+    protected $allowedFields    = ['user_id', 'animal_id'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,12 +38,4 @@ class AnimalModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function getAnimal($slug = false)
-    {
-        if ($slug == false) {
-            return $this->findAll();
-        }
-        return $this->where(['slug' => $slug])->first();
-    }
 }

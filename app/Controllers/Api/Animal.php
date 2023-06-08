@@ -3,6 +3,7 @@
 namespace App\Controllers\Api;
 
 use App\Models\AnimalModel;
+use App\Models\FavoriteModel;
 use CodeIgniter\RESTful\ResourceController;
 
 class Animal extends ResourceController
@@ -148,7 +149,7 @@ class Animal extends ResourceController
         }
 
         $this->animalModel->save([
-            'id' => $id,
+            'animal_id' => $id,
             'name' => $this->request->getVar('name'),
             'slug' => $slug,
             'description' => $this->request->getVar('description'),
@@ -163,6 +164,78 @@ class Animal extends ResourceController
             'animal' => $this->animalModel->find($id)
         ];
         return $this->respond($response, 200);
+    }
+
+    public function addToFavorite($animalId)
+    {
+        // Get user ID from authentication or session
+        $userId = 1; // Replace with your own logic
+
+        $favoriteModel = new FavoriteModel();
+
+        // Check if the animal is already in the user's favorite
+        $existingWishlist = $favoriteModel
+            ->where('user_id', $userId)
+            ->where('animal_id', $animalId)
+            ->first();
+
+        if ($existingWishlist) {
+            return $this->fail('Animal already in the favorite.');
+        }
+
+        // Create a new favorite entry
+        $data = [
+            'user_id' => $userId,
+            'animal_id' => $animalId,
+        ];
+
+        $favoriteId = $favoriteModel->insert($data);
+
+        if (!$favoriteId) {
+            return $this->failServerError('Failed to add animal to favorite.');
+        }
+
+        return $this->respondCreated([
+            'favorite_id' => $favoriteId,
+            'data' => $data
+        ]);
+    }
+
+    public function removeFromFavorite($favoriteId)
+    {
+        $favoriteModel = new FavoriteModel();
+        $favorite = $favoriteModel->find($favoriteId);
+
+        if (!$favorite) {
+            return $this->failNotFound('Favorite item not found.');
+        }
+
+        $favoriteModel->delete($favoriteId);
+
+        return $this->respondDeleted(['favorite_id' => $favoriteId]);
+    }
+
+    public function getUserFavorite()
+    {
+        // Get user ID from authentication or session
+        $userId = 1; // Replace with your own logic
+
+        $favoriteModel = new FavoriteModel();
+
+        $favoriteItem = $favoriteModel
+            ->where('user_id', $userId)
+            ->findAll();
+
+        $favoriteAnimal = [];
+
+        foreach ($favoriteItem as $item) {
+            $animal = $this->animalModel->find($item['animal_id']);
+            if ($animal) {
+                $favoriteAnimal[] = $animal;
+            }
+        }
+
+        return $this->respond($favoriteAnimal);
     }
 
     public function delete($id = null)
