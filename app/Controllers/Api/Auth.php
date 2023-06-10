@@ -54,10 +54,7 @@ class Auth extends ResourceController
         ]);
 
         if (!$rules) {
-            $response = [
-                'message' => $this->validator->getErrors()
-            ];
-            return $this->failValidationErrors($response);
+            return $this->failValidationErrors($this->validator->getErrors());
         }
 
         $username = $this->request->getVar('username');
@@ -71,8 +68,8 @@ class Auth extends ResourceController
         }
 
         return $this->respond([
-            'message' => 'User logged in successfully',
-            'data' => $user
+            'status' => 200,
+            'messages' => $user
         ]);
     }
 }
