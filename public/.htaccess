@@ -1,7 +1,9 @@
-# enable cors for glb file
+# enable cors for glb/gltf file
 <IfModule mod_headers.c>
-<FilesMatch "\.(glb|ttf|ttc|otf|eot|woff|woff2|font.css|css|js)$">
+<FilesMatch "\.(glb|gltf|ttf|ttc|otf|eot|woff|woff2|font.css|css|js)$">
 Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Headers "X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method"
+Header set Access-Control-Allow-Methods "GET, POST, OPTIONS, PUT, DELETE"
 </FilesMatch>
 </IfModule>
 
