@@ -196,6 +196,7 @@ class Animal extends ResourceController
         }
 
         return $this->respondCreated([
+            'message' => 'Added to favorite',
             'favorite_id' => $favoriteId,
             'data' => $data
         ]);
