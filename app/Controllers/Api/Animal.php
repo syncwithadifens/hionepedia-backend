@@ -169,7 +169,7 @@ class Animal extends ResourceController
     public function addToFavorite($animalId)
     {
         // Get user ID from authentication or session
-        $userId = 1; // Replace with your own logic
+        $userId = $this->request->getVar('user_id'); // Replace with your own logic
 
         $favoriteModel = new FavoriteModel();
 
@@ -218,10 +218,16 @@ class Animal extends ResourceController
 
     public function getUserFavorite()
     {
-        $userId = 1;
+        $userId = $this->request->getVar('user_id');
+        if ($userId) {
+            $favorites = $this->animalModel->join('favorites', 'animals.animal_id = favorites.animal_id')->where('favorites.user_id', $userId)->get()->getResult();
+        } else {
+            $favorites = 'No user id found';
+        }
+
         $result = [
             'status' => 'success',
-            'favorited' => $this->animalModel->join('favorites', 'animals.animal_id = favorites.animal_id')->where('favorites.user_id', $userId)->get()->getResult()
+            'favorited' => $favorites
         ];
 
         return $this->respondCreated($result);
