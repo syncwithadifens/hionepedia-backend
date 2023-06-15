@@ -66,7 +66,7 @@ class Animal extends BaseController
         //* Upload Thumbnail
         $thumbnail = $this->request->getFile('thumbnail');
         if ($thumbnail->getError() == 4) {
-            $thumbnailName = 'default_thumbnail.png';
+            $thumbnailName = 'default_thumbnail.jpg';
         } else {
             $thumbnailName = $thumbnail->getRandomName();
             $thumbnail->move('img', $thumbnailName);
@@ -122,7 +122,7 @@ class Animal extends BaseController
         } else {
             $thumbnailName = $thumbnail->getRandomName();
             $thumbnail->move('img', $thumbnailName);
-            if ($this->request->getVar('oldThumbnail') !== 'default_thumbnail.png') {
+            if ($this->request->getVar('oldThumbnail') !== 'default_thumbnail.jpg') {
                 unlink('img/' . $this->request->getVar('oldThumbnail'));
             }
         }
@@ -168,7 +168,7 @@ class Animal extends BaseController
     public function delete($id)
     {
         $animal = $this->animalModel->find($id);
-        if ($animal['thumbnail'] != 'default_thumbnail.png') {
+        if ($animal['thumbnail'] != 'default_thumbnail.jpg') {
             unlink('img/' . $animal['thumbnail']);
         }
         if ($animal['sound'] != 'default_sound.mp3') {

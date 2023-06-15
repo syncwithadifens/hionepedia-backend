@@ -59,7 +59,7 @@ class Animal extends ResourceController
         //* Upload Thumbnail
         $thumbnail = $this->request->getFile('thumbnail');
         if ($thumbnail->getError() == 4) {
-            $thumbnailName = 'default_thumbnail.png';
+            $thumbnailName = 'default_thumbnail.jpg';
         } else {
             $thumbnailName = $thumbnail->getRandomName();
             $thumbnail->move('img', $thumbnailName);
@@ -124,7 +124,7 @@ class Animal extends ResourceController
         //* Check existing thumbnail
         $thumbnail = $this->request->getFile('thumbnail');
         if ($thumbnail->getError() == 4) {
-            $thumbnailName = 'default_thumbnail.png';
+            $thumbnailName = 'default_thumbnail.jpg';
         } else {
             $thumbnailName = $thumbnail->getRandomName();
             $thumbnail->move('img', $thumbnailName);
@@ -237,7 +237,7 @@ class Animal extends ResourceController
     {
         $animal = $this->animalModel->find($id);
 
-        if ($animal['thumbnail'] != 'default_thumbnail.png') {
+        if ($animal['thumbnail'] != 'default_thumbnail.jpg') {
             unlink('img/' . $animal['thumbnail']);
         }
 

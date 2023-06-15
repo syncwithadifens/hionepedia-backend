@@ -89,7 +89,7 @@
                                                         <input type="file" class="form-control" name="thumbnail" id="thumbnail" aria-describedby="thumbnail" onchange="previewImg()">
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <img src="/img/default_thumbnail.png" alt="..." class="img-thumbnail img-preview">
+                                                        <img src="/img/default_thumbnail.jpg" alt="..." class="img-thumbnail img-preview">
                                                     </div>
                                                 </div>
 
