@@ -85,9 +85,11 @@ class Animal extends BaseController
         $model = $this->request->getFile('model');
         if ($model->getError() == 4) {
             $modelName = 'default_model.glb';
+            $offline = 'yes';
         } else {
             $modelName = $model->getRandomName();
             $model->move('model', $modelName);
+            $offline = 'no';
         }
 
         $this->animalModel->save([
@@ -97,6 +99,7 @@ class Animal extends BaseController
             'thumbnail' => $thumbnailName,
             'sound' => $soundName,
             'model' => $modelName,
+            'offline' => $offline
         ]);
 
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan');

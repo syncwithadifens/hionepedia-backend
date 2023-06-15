@@ -48,6 +48,12 @@ class Mimes
             'application/x-binary',
             'application/x-macbinary',
         ],
+        'glb' => [
+            'application/octet-stream',
+        ],
+        'gltf' => [
+            'application/octet-stream',
+        ],
         'dms' => 'application/octet-stream',
         'lha' => 'application/octet-stream',
         'lzh' => 'application/octet-stream',
@@ -490,7 +496,7 @@ class Mimes
     {
         $extension = trim(strtolower($extension), '. ');
 
-        if (! array_key_exists($extension, static::$mimes)) {
+        if (!array_key_exists($extension, static::$mimes)) {
             return null;
         }
 

@@ -61,9 +61,9 @@
                                 <?php $i = 1; ?>
                                 <?php foreach ($animal as $a) : ?>
                                     <tr>
-                                        <td class="align-middle"><?= $i++ ?></td>
-                                        <td class="align-middle"><?= $a['name']; ?></td>
-                                        <td class="align-middle" style="text-align: justify;"><?= $a['description']; ?></td>
+                                        <td><?= $i++ ?></td>
+                                        <td><?= $a['name']; ?></td>
+                                        <td style="text-align: justify;"><?= $a['description']; ?></td>
                                         <td class="align-middle"><img src="/img/<?= $a['thumbnail']; ?>" alt="image" class="thumbnail"></td>
                                         <td class="align-middle"><?= $a['sound']; ?></td>
                                         <td class="align-middle"><?= $a['model']; ?></td>
