@@ -16,9 +16,9 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Form Layout</h3>
+                        <h3>Tambah Data Hewan</h3>
                         <p class="text-subtitle text-muted">
-                            Multiple form layouts, you can use.
+                            Halaman untuk menambahkan data hewan langka.
                         </p>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
@@ -28,7 +28,7 @@
                                     <a href="index.html">Dashboard</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Form Layout
+                                    Tambah Hewan
                                 </li>
                             </ol>
                         </nav>
@@ -41,9 +41,6 @@
                 <div class="row match-height">
                     <div class=" col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Vertical Form with Icons</h4>
-                            </div>
                             <div class="card-content">
                                 <div class="card-body">
                                     <form class="form form-vertical" action="/animal" method="post" enctype="multipart/form-data">
@@ -107,7 +104,7 @@
                                                 </div>
                                                 <div class="col-12 d-flex justify-content-end">
                                                     <button type="submit" class="btn btn-primary me-1 mb-1">
-                                                        Submit
+                                                        Tambah
                                                     </button>
                                                     <input type="reset" class="btn btn-light-secondary me-1 mb-1"></input>
                                                 </div>

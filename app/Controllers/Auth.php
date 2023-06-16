@@ -108,7 +108,7 @@ class Auth extends BaseController
     {
         $data = [
             'status' => 'User',
-            'title' => 'Semua User Terdaftar',
+            'title' => 'Semua User',
             'user' => $this->userModel->findAll()
         ];
         return view('auth/index', $data);
