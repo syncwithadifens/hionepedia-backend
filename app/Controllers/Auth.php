@@ -17,7 +17,7 @@ class Auth extends BaseController
     public function index()
     {
         $session = session();
-        if ($session->has('logged_in')) {
+        if ($session->has('role') && $session->get('role') == 'admin') {
             return redirect()->to('/animal');
         }
 
@@ -53,15 +53,19 @@ class Auth extends BaseController
 
         if ($user) {
             if (password_verify($pin, $user['pin'])) {
-                // Store user data in session
-                $sessionData = [
-                    'user_id' => $user['user_id'],
-                    'username' => $user['username'],
-                    'logged_in' => true
-                ];
-                session()->set($sessionData);
-                session()->setFlashdata('pesan', 'Login berhasil');
-                return redirect()->to('/animal');
+                if ($user['role'] == 'admin') {
+                    // Store user data in session
+                    $sessionData = [
+                        'user_id' => $user['user_id'],
+                        'username' => $user['username'],
+                        'role' => $user['role']
+                    ];
+                    session()->set($sessionData);
+                    session()->setFlashdata('pesan', 'Login berhasil');
+                    return redirect()->to('/animal');
+                } else {
+                    return redirect()->back()->withInput()->with('pesan', 'Akun ini tidak terdaftar sebagai admin');
+                }
             }
         }
 
@@ -98,6 +102,23 @@ class Auth extends BaseController
 
         session()->setFlashdata('pesan', 'Registrasi berhasil');
         return redirect()->to('/login');
+    }
+
+    public function getAllUser()
+    {
+        $data = [
+            'status' => 'User',
+            'title' => 'Semua User Terdaftar',
+            'user' => $this->userModel->findAll()
+        ];
+        return view('auth/index', $data);
+    }
+
+    public function delete($id)
+    {
+        $this->userModel->delete($id);
+        session()->setFlashdata('pesan', 'User berhasil dihapus');
+        return redirect()->to('/user');
     }
 
     public function logout()

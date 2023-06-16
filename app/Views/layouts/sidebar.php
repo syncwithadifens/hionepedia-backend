@@ -59,7 +59,7 @@
 
                 <li class="sidebar-title">Administrator</li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="/user" class="sidebar-link">
                         <i class="bi bi-pentagon-fill"></i>
                         <span>User</span>
                     </a>

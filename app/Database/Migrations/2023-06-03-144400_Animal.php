@@ -42,7 +42,7 @@ class Animal extends Migration
             ],
             'offline'      => [
                 'type'           => 'VARCHAR',
-                'constraint'        => '100',
+                'constraint'        => '3',
                 'default' => 'no'
             ],
             'created_at DATETIME DEFAULT CURRENT_TIMESTAMP'

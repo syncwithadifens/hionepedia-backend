@@ -17,7 +17,7 @@ class Animal extends BaseController
     public function index()
     {
         $session = session();
-        if (!$session->has('logged_in')) {
+        if (!$session->has('role')) {
             return redirect()->to('/login');
         }
 

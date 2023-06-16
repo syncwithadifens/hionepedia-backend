@@ -45,6 +45,8 @@ $routes->post('login', 'Auth::doLogin');
 $routes->get('register', 'Auth::register');
 $routes->post('register', 'Auth::doRegister');
 $routes->get('logout', 'Auth::logout');
+$routes->get('user', 'Auth::getAllUser');
+$routes->get('user/(:num)', 'Auth::delete/$1');
 
 $routes->group('api', function ($routes) {
     $routes->post('login', 'Api\Auth::login');

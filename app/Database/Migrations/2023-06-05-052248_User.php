@@ -22,7 +22,7 @@ class User extends Migration
             ],
             'pin'       => [
                 'type'           => 'VARCHAR',
-                'constraint'     => '255'
+                'constraint'     => '6'
             ],
             'age'       => [
                 'type'           => 'INT',
@@ -33,6 +33,10 @@ class User extends Migration
                 'type'           => 'TEXT',
                 'constraint'     => '255',
                 'null'           => true,
+            ],
+            'role'       => [
+                'type'           => 'VARCHAR',
+                'constraint'     => '5'
             ],
             'created_at DATETIME DEFAULT CURRENT_TIMESTAMP'
         ]);
