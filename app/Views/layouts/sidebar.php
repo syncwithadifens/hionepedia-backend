@@ -68,18 +68,6 @@
                 <li class="sidebar-title">Raise Support</li>
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
-                        <i class="bi bi-life-preserver"></i>
-                        <span>Documentation</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-puzzle"></i>
-                        <span>Contribute</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
                         <i class="bi bi-cash"></i>
                         <span>Donate</span>
                     </a>
