@@ -64,7 +64,20 @@
                                         <td><?= $u['age']; ?></td>
                                         <td><?= $u['hobby']; ?></td>
                                         <td><?= $u['role']; ?></td>
-                                        <td><a href="/user/<?= $u['user_id']; ?>" class="btn btn-danger">Hapus</a></td>
+                                        <td>
+										 <a href="/register" class="btn btn-primary"><i
+                                                        class="bi bi-plus-circle"></i></a>
+                                                <a href="/user/<?= $u['user_id']; ?>/edit" class="btn btn-info"><i
+                                                        class="bi bi-pencil"></i></a>
+
+                                                <form action="/user/<?= $u['user_id']; ?>" method="get"
+                                                    class="d-inline">
+                                                    <?= csrf_field() ?>
+                                                    <button type="submit" class="btn btn-danger"
+                                                        onclick="return confirm('Apakah anda ingin menghapus?');"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+										</td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

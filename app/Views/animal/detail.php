@@ -45,7 +45,7 @@
                                 <img class="card-img-top img-fluid" src="/img/<?= $animal['thumbnail']; ?>" alt="Card image cap" style="height: 20rem; object-fit: contain;" />
                                 <div class="card-body">
                                     <h4 class="card-title"><?= $animal['name']; ?></h4>
-                                    <p class="card-text">
+                                    <p class="card-text" style="text-align:justify;">
                                         <?= $animal['description']; ?>
                                     </p>
                                     <p class="card-text">

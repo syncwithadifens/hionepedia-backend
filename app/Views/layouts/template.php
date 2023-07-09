@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $title; ?></title>
-
+  	<link rel="icon" type="image/x-icon" href="/assets/compiled/favicon.ico">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/assets/extensions/simple-datatables/style.css" />
     <link rel="stylesheet" href="/assets/compiled/css/table-datatable.css" />
