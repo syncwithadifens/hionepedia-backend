@@ -123,39 +123,47 @@ class Animal extends ResourceController
 
         //* Check existing thumbnail
         $thumbnail = $this->request->getFile('thumbnail');
-        if ($thumbnail->getError() == 4) {
-            $thumbnailName = 'default_thumbnail.jpg';
-        } else {
+        if ($thumbnail != null) {
             $thumbnailName = $thumbnail->getRandomName();
             $thumbnail->move('img', $thumbnailName);
+            if ($this->request->getVar('oldThumbnail') !== 'default_thumbnail.jpg') {
+                unlink('img/' . $this->request->getVar('oldThumbnail'));
+            }
+            $this->animalModel->update($id, [
+                'thumbnail' => $thumbnailName,
+            ]);
         }
 
         //* Check existing sound
         $sound = $this->request->getFile('sound');
-        if ($sound->getError() == 4) {
-            $soundName = 'default_sound.mp3';
-        } else {
+        if ($sound != null) {
             $soundName = $sound->getRandomName();
             $sound->move('sound', $soundName);
+            if ($this->request->getVar('oldSound') !== 'default_sound.mp3') {
+                unlink('sound/' . $this->request->getVar('oldSound'));
+            }
+            $this->animalModel->update($id, [
+                'sound' => $soundName,
+            ]);
         }
 
         //* Check existing model
         $model = $this->request->getFile('model');
-        if ($model->getError() == 4) {
-            $modelName = 'default_model.glb';
-        } else {
+        if ($model != null) {
             $modelName = $model->getRandomName();
             $model->move('model', $modelName);
+            if ($this->request->getVar('oldModel') !== 'default_model.glb') {
+                unlink('model/' . $this->request->getVar('oldModel'));
+            }
+            $this->animalModel->update($id, [
+                'model' => $modelName,
+            ]);
         }
 
-        $this->animalModel->save([
-            'animal_id' => $id,
-            'name' => $this->request->getVar('name'),
+        $this->animalModel->update($id, [
             'slug' => $slug,
+            'name' => $this->request->getVar('name'),
             'description' => $this->request->getVar('description'),
-            'thumbnail' => $thumbnailName,
-            'sound' => $soundName,
-            'model' => $modelName,
         ]);
 
         $response = [

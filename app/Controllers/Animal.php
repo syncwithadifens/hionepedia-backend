@@ -31,6 +31,11 @@ class Animal extends BaseController
 
     public function show($slug)
     {
+        $session = session();
+        if (!$session->has('role')) {
+            return redirect()->to('/login');
+        }
+
         $data = [
             'status' => 'detail',
             'title' => 'Detail Animal',
@@ -41,7 +46,11 @@ class Animal extends BaseController
 
     public function new()
     {
-        session();
+        $session = session();
+        if (!$session->has('role')) {
+            return redirect()->to('/login');
+        }
+
         $data = [
             'status' => 'new',
             'title' => 'Form tambah data',
@@ -108,6 +117,11 @@ class Animal extends BaseController
 
     public function edit($slug)
     {
+        $session = session();
+        if (!$session->has('role')) {
+            return redirect()->to('/login');
+        }
+
         $data = [
             'status' => 'edit',
             'title' => 'Ubah data',
@@ -118,6 +132,9 @@ class Animal extends BaseController
 
     public function update($id)
     {
+        //* Create slug
+        $slug = url_title($this->request->getVar('name'), '-', true);
+
         //* Check existing thumbnail
         $thumbnail = $this->request->getFile('thumbnail');
         if ($thumbnail->getError() == 4) {
@@ -128,6 +145,9 @@ class Animal extends BaseController
             if ($this->request->getVar('oldThumbnail') !== 'default_thumbnail.jpg') {
                 unlink('img/' . $this->request->getVar('oldThumbnail'));
             }
+            $this->animalModel->update($id, [
+                'thumbnail' => $thumbnailName,
+            ]);
         }
 
         //* Check existing sound
@@ -140,6 +160,9 @@ class Animal extends BaseController
             if ($this->request->getVar('oldSound') !== 'default_sound.mp3') {
                 unlink('sound/' . $this->request->getVar('oldSound'));
             }
+            $this->animalModel->update($id, [
+                'sound' => $soundName,
+            ]);
         }
 
         //* Check existing model
@@ -152,16 +175,15 @@ class Animal extends BaseController
             if ($this->request->getVar('oldModel') !== 'default_model.glb') {
                 unlink('model/' . $this->request->getVar('oldModel'));
             }
+            $this->animalModel->update($id, [
+                'model' => $modelName,
+            ]);
         }
 
-        $this->animalModel->save([
-            'animal_id' => $id,
+        $this->animalModel->update($id, [
+            'slug' => $slug,
             'name' => $this->request->getVar('name'),
-            'slug' => $this->request->getVar('slug'),
             'description' => $this->request->getVar('description'),
-            'thumbnail' => $thumbnailName,
-            'sound' => $soundName,
-            'model' => $modelName,
         ]);
 
         session()->setFlashdata('pesan', 'Data berhasil diubah');

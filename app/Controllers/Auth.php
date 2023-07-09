@@ -107,11 +107,35 @@ class Auth extends BaseController
     public function getAllUser()
     {
         $data = [
-            'status' => 'User',
+            'status' => 'user',
             'title' => 'Semua User',
             'user' => $this->userModel->findAll()
         ];
         return view('auth/index', $data);
+    }
+
+    public function edit($id)
+    {
+        $data = [
+            'status' => 'user',
+            'title' => 'Edit User',
+            'user' => $this->userModel->find($id)
+        ];
+        return view('auth/edit', $data);
+    }
+
+    public function update($id)
+    {
+
+        $this->userModel->update($id, [
+            'username' => $this->request->getVar('username'),
+            'age' => $this->request->getVar('age'),
+            'hobby' => $this->request->getVar('hobby'),
+            'role' => $this->request->getVar('role'),
+
+        ]);
+        session()->setFlashdata('pesan', 'User berhasil diubah');
+        return redirect()->to('/user');
     }
 
     public function delete($id)

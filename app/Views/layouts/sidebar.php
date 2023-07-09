@@ -58,7 +58,7 @@
                 </li>
 
                 <li class="sidebar-title">Administrator</li>
-                <li class="sidebar-item">
+                <li class="sidebar-item  <?= ($status === 'user') ? 'active' : '' ?>">
                     <a href="/user" class="sidebar-link">
                         <i class="bi bi-pentagon-fill"></i>
                         <span>User</span>

@@ -16,9 +16,9 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Edit Data Hewan</h3>
+                        <h3>Edit Data User</h3>
                         <p class="text-subtitle text-muted">
-                            Halaman untuk mengubah data hewan langka.
+                            Halaman untuk mengubah data user.
                         </p>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
@@ -28,7 +28,7 @@
                                     <a href="index.html">Dashboard</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Edit Hewan
+                                    Edit User
                                 </li>
                             </ol>
                         </nav>
@@ -43,25 +43,22 @@
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form form-vertical" action="/animal/<?= $animal['animal_id']; ?>" method="post" enctype="multipart/form-data">
+                                    <form class="form form-vertical" action="/user/<?= $user['user_id']; ?>" method="post">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" name="_method" value="PUT">
-                                        <input type="hidden" name="oldThumbnail" value="<?= $animal['thumbnail']; ?>">
-                                        <input type="hidden" name="oldSound" value="<?= $animal['sound']; ?>">
-                                        <input type="hidden" name="oldModel" value="<?= $animal['model']; ?>">
                                         <div class="form-body">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form-group has-icon-left">
-                                                        <label for="first-name-icon">Nama Hewan</label>
+                                                        <label for="first-name-icon">Username</label>
                                                         <div class="position-relative">
-                                                            <input type="text" name="name" class="form-control <?= (session('validation') && session('validation')->hasError('name')) ? 'is-invalid' : ''; ?>" placeholder="Nama hewan langka" id="first-name-icon" value="<?= $animal['name']; ?>" />
+                                                            <input type="text" name="username" class="form-control <?= (session('validation') && session('validation')->hasError('username')) ? 'is-invalid' : ''; ?>" placeholder="Username" id="first-username-icon" value="<?= $user['username']; ?>" />
                                                             <div class="form-control-icon">
                                                                 <i class="bi bi-person"></i>
                                                             </div>
-                                                            <?php if (session('validation') && session('validation')->hasError('name')) : ?>
+                                                            <?php if (session('validation') && session('validation')->hasError('username')) : ?>
                                                                 <div class="invalid-feedback">
-                                                                    <?= session('validation')->getError('name'); ?>
+                                                                    <?= session('validation')->getError('username'); ?>
                                                                 </div>
                                                             <?php endif; ?>
                                                         </div>
@@ -69,48 +66,55 @@
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group has-icon-left">
-                                                        <label for="email-id-icon">Deskripsi</label>
+                                                        <label for="email-id-icon">Umur</label>
                                                         <div class="position-relative">
-                                                            <input type="text" name="description" class="form-control <?= (session('validation') && session('validation')->hasError('description')) ? 'is-invalid' : ''; ?>" placeholder="Deskripsi mengenai hewan" id="email-id-icon" value="<?= $animal['description']; ?>" />
+                                                            <input type="text" name="age" class="form-control <?= (session('validation') && session('validation')->hasError('description')) ? 'is-invalid' : ''; ?>" placeholder="Umur" id="email-id-icon" value="<?= $user['age']; ?>" />
                                                             <div class="form-control-icon">
-                                                                <i class="bi bi-blockquote-left"></i>
+                                                                <i class="bi bi-calendar-date"></i>
                                                             </div>
-                                                            <?php if (session('validation') && session('validation')->hasError('description')) : ?>
+                                                            <?php if (session('validation') && session('validation')->hasError('age')) : ?>
                                                                 <div class="invalid-feedback">
-                                                                    <?= session('validation')->getError('description'); ?>
+                                                                    <?= session('validation')->getError('age'); ?>
                                                                 </div>
                                                             <?php endif; ?>
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <div class="form-group row mb-3">
-                                                    <label for="thumbnail" class="col-sm-2 col-form-label" id="thumbnailLabel">Thumbnail</label>
-                                                    <div class="col-sm-8 input-group mb-3">
-                                                        <input type="file" class="form-control" name="thumbnail" id="thumbnail" aria-describedby="thumbnail" onchange="previewImg()">
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <img src="/img/<?= $animal['thumbnail']; ?>" alt="..." class="img-thumbnail img-preview">
+                                                <div class="col-12">
+                                                    <div class="form-group has-icon-left">
+                                                        <label for="email-id-icon">Hobi</label>
+                                                        <div class="position-relative">
+                                                            <input type="text" name="hobby" class="form-control <?= (session('validation') && session('validation')->hasError('description')) ? 'is-invalid' : ''; ?>" placeholder="Hobi" id="email-id-icon" value="<?= $user['hobby']; ?>" />
+                                                            <div class="form-control-icon">
+                                                                <i class="bi bi-controller"></i>
+                                                            </div>
+                                                            <?php if (session('validation') && session('validation')->hasError('hobby')) : ?>
+                                                                <div class="invalid-feedback">
+                                                                    <?= session('validation')->getError('hobby'); ?>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                        </div>
                                                     </div>
                                                 </div>
-
-                                                <div class="form-group row mb-3">
-                                                    <label for="sound" class="col-sm-2 col-form-label" id="soundLabel">Sound</label>
-                                                    <div class="col-sm-8 input-group mb-3">
-                                                        <input type="file" class="form-control" name="sound" id="sound" aria-describedby="sound">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row mb-3">
-                                                    <label for="model" class="col-sm-2 col-form-label" id="modelLabel">Model</label>
-                                                    <div class="col-sm-8 input-group mb-3">
-                                                        <input type="file" class="form-control" name="model" id="model" aria-describedby="model">
+                                                <div class="col-12">
+                                                    <div class="form-group has-icon-left">
+                                                        <label for="email-id-icon">Role</label>
+                                                        <div class="position-relative">
+                                                            <select name="role" class="form-select" aria-label="Default select example">
+                                                                <option selected disabled>--Pilih--</option>
+                                                                <option value="admin" <?= $user['role'] == 'admin' ? 'selected' : '' ?>>
+                                                                    Admin</option>
+                                                                <option value="user" <?= $user['role'] == 'user' ? 'selected' : '' ?>>
+                                                                    User</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 d-flex justify-content-end">
                                                     <button type="submit" class="btn btn-primary me-1 mb-1">
                                                         Ubah
                                                     </button>
-                                                    <a href="/animal/<?= $animal['slug']; ?>" class="btn btn-light-secondary me-1 mb-1">
+                                                    <a href="/user" class="btn btn-light-secondary me-1 mb-1">
                                                         Kembali
                                                     </a>
                                                 </div>

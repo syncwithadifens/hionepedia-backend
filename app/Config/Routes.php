@@ -29,32 +29,37 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+// Web Auth Routes
 $routes->get('/', 'Auth::index');
-$routes->resource('animal');
-$routes->post('animal/update/(:segment)', 'Animal::update/$1');
-
-$routes->resource('api/animal', ['controller' => 'Api\Animal']);
-$routes->post('api/animal/update/(:num)', 'Api\Animal::update/$1');
-
-$routes->post('api/animal/(:num)/favorite', 'Api\Animal::addToFavorite/$1');
-$routes->delete('api/favorite/(:num)', 'Api\Animal::removeFromFavorite/$1');
-$routes->get('api/favorite', 'Api\Animal::getUserFavorite');
-
 $routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::doLogin');
 $routes->get('register', 'Auth::register');
 $routes->post('register', 'Auth::doRegister');
 $routes->get('logout', 'Auth::logout');
 $routes->get('user', 'Auth::getAllUser');
-$routes->get('user/(:num)', 'Auth::delete/$1');
+$routes->get('user/(:num)/edit', 'Auth::edit/$1');
+$routes->put('user/(:num)', 'Auth::update/$1');
+$routes->delete('user/(:num)', 'Auth::delete/$1');
 
+// Web Animal Routes
+$routes->resource('animal', ['controller' => 'Animal']);
+
+// API Auth Routes
 $routes->group('api', function ($routes) {
     $routes->post('login', 'Api\Auth::login');
     $routes->post('register', 'Api\Auth::register');
 });
 
-// $routes->get('animal/(:num)', 'Api\Animal::show/$1');
-// $routes->delete('animal/(:num)', 'Api\Animal::delete/$1');
+// API Animal Routes
+$routes->resource('api/animal', ['controller' => 'Api\Animal', 'except' => 'update']);
+$routes->group('api', function ($routes) {
+    $routes->post('animal/update/(:num)', 'Api\Animal::update/$1');
+    $routes->post('animal/(:num)/favorite', 'Api\Animal::addToFavorite/$1');
+    $routes->delete('favorite/(:num)', 'Api\Animal::removeFromFavorite/$1');
+    $routes->get('favorite', 'Api\Animal::getUserFavorite');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
